@@ -14,6 +14,7 @@ namespace FornavnEfternavn
             string Alias1;
             string FuldNavn;
             List<string> Navnelist = new List<string>();
+            Dictionary<string, int> NavneDic = new Dictionary<string, int>(); 
 
             do
             {
@@ -29,7 +30,15 @@ namespace FornavnEfternavn
                         FNavn1 = Console.ReadLine();
                         Console.WriteLine("Indtast Efternavn");
                         ENavn1 = Console.ReadLine();
-                        Alias1 = FNavn1.Substring(0, 1) + ENavn1.Substring(0, 1);
+                        Alias1 = FNavn1.Substring(0, 2) + ENavn1.Substring(0, 2);
+                        if (NavneDic.ContainsKey(Alias1))
+                        {
+                            NavneDic[Alias1]++;
+                        }
+                        else
+                        {
+                            NavneDic.Add(Alias1,1);
+                        }
                         FuldNavn = name.Navne(ENavn1, FNavn1, Alias1);
                         Navnelist.Add(FuldNavn);
                         break;
@@ -39,12 +48,16 @@ namespace FornavnEfternavn
                         {
                             Console.WriteLine(Listen);
                         }
+                        foreach (var ID in NavneDic)
+                        {
+                           Console.WriteLine(ID);
+                        }
                         break;
                     case"q":
                         løkke = false; 
                         break;
                     default:
-                        string test = "hjh";
+                        
                         break;
                 }
             
